@@ -92,7 +92,8 @@ def command_whois(update: Update, context: CallbackContext) -> None:
                 "Сообщение отправлено от имени чата/канала",
                 quote=True
             )
-            return
+            return None
+
         update.message.reply_text(
             "Это бот, глупышка",
             quote=True

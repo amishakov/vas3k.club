@@ -1,0 +1,437 @@
+@charset "utf-8";
+
+/* April Fools: Soviet / Red Alert themed overrides */
+
+/* Fonts: bold Soviet headlines + newspaper body */
+@import url("https://fonts.googleapis.com/css2?family=Russo+One&family=Roboto+Slab:wght@400;700&display=swap");
+
+:root {
+    --sans-font: "Roboto Slab", "Merriweather", Georgia, "Times New Roman", serif;
+    --serif-font: "Roboto Slab", "Merriweather", Georgia, "Times New Roman", serif;
+
+    --block-border-radius: 3px;
+    --button-border-radius: 0;
+
+    --button-color: #fff;
+    --button-bg-color: #b30000;
+    --button-border: solid 2px #000;
+    --button-hover-color: #000;
+    --button-hover-bg-color: #ffd800;
+    --button-hover-border: solid 2px #000;
+
+    --badge-color: rgba(255, 216, 0, 0.95);
+}
+
+html,
+html[theme="light"] {
+    --bg-color: #f5e6c5; /* aged paper */
+    --opposite-bg-color: #1a0d0d;
+
+    --text-color: #201010;
+    --brighter-text-color: #000;
+    --opposite-text-color: #f5e6c5;
+
+    --block-bg-color: #f9eed8;
+    --opposite-block-bg-color: #1a0d0d;
+    --block-shadow: 0 0 0 1px #000, 3px 3px 0 rgba(0, 0, 0, 0.8);
+    --block-border: solid 2px #000;
+
+    --link-color: #b30000;
+    --link-hover-color: #ff1a1a;
+    --visited-link-color: #661919;
+
+    --button-color: #f5e6c5;
+    --button-bg-color: #b30000;
+    --button-disabled-bg-color: #b8a98b;
+    --button-border: solid 3px #000;
+    --button-hover-color: #000;
+    --button-hover-bg-color: #ffd800;
+    --button-hover-border: solid 3px #000;
+
+    --select-color: #201010;
+    --select-bg-color: #f9eed8;
+
+    --input-color: #000;
+    --input-bg-color: #fdf4dd;
+    --input-border-color: #000;
+    --input-toolbar-bg: #f9e3b3;
+    --input-toolbar-button-color: #000;
+    --input-link: #7f0000;
+    --input-selection-color: #f2d06a;
+}
+
+html[theme="dark"] {
+    /* Slightly lighter background for readability */
+    --bg-color: #1b1212;
+    --opposite-bg-color: #f5e6c5;
+
+    /* Softer, high-contrast text */
+    --text-color: #f9ecd2;
+    --brighter-text-color: #ffffff;
+    --opposite-text-color: #1b1212;
+
+    /* Blocks a bit lighter than background */
+    --block-bg-color: #241616;
+    --opposite-block-bg-color: #f5e6c5;
+    --block-shadow: 0 0 0 1px #000, 3px 3px 0 rgba(0, 0, 0, 0.85);
+    --block-border: solid 2px #ff4a4a;
+
+    /* Links: warm yellow but not blinding */
+    --link-color: #ffd75a;
+    --link-hover-color: #fff6c2;
+    --visited-link-color: #ffb869;
+
+    /* Buttons keep red, but text slightly brighter */
+    --button-color: #1b1212;
+    --button-bg-color: #ff2b2b;
+    --button-disabled-bg-color: #704040;
+    --button-border: solid 3px #fff;
+    --button-hover-color: #1b1212;
+    --button-hover-bg-color: #ffd800;
+    --button-hover-border: solid 3px #ffd800;
+
+    /* Inputs and selects: higher contrast against bg */
+    --select-color: #1b1212;
+    --select-bg-color: #f5e6c5;
+
+    --input-color: #f9ecd2;
+    --input-bg-color: #2a1616;
+    --input-border-color: #ff4a4a;
+    --input-toolbar-bg: #1f1313;
+    --input-toolbar-button-color: #ffd800;
+    --input-link: #ffb869;
+    --input-selection-color: #8b4a32;
+}
+
+@media (prefers-color-scheme: dark) {
+    html {
+        --bg-color: #1b1212;
+        --opposite-bg-color: #f5e6c5;
+
+        --text-color: #f9ecd2;
+        --brighter-text-color: #ffffff;
+        --opposite-text-color: #1b1212;
+
+        --block-bg-color: #241616;
+        --opposite-block-bg-color: #f5e6c5;
+        --block-shadow: 0 0 0 1px #000, 3px 3px 0 rgba(0, 0, 0, 0.85);
+        --block-border: solid 2px #ff4a4a;
+
+        --link-color: #ffd75a;
+        --link-hover-color: #fff6c2;
+        --visited-link-color: #ffb869;
+
+        --button-color: #1b1212;
+        --button-bg-color: #ff2b2b;
+        --button-border: solid 3px #fff;
+        --button-hover-color: #1b1212;
+        --button-hover-bg-color: #ffd800;
+        --button-hover-border: solid 3px #ffd800;
+    }
+}
+
+/* Typography: blocky headlines, newspaper body */
+body,
+.feed,
+.comment,
+.reply {
+    font-family: var(--sans-font) !important;
+    letter-spacing: 0.03em;
+    text-transform: none;
+    background-color: var(--bg-color);
+    background-image:
+        repeating-linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 0.03),
+            rgba(0, 0, 0, 0.03) 1px,
+            transparent 1px,
+            transparent 3px
+        );
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: "Russo One", var(--sans-font);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+}
+
+/* Newspaper-style post and comment titles */
+.feed-post-title,
+.feed-topic-header-name,
+.comment-title,
+.comment-header-author-name,
+.reply-author {
+    font-family: "Russo One", var(--sans-font) !important;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+}
+
+.feed-sidebar-header,
+.feed-sidebar-menu,
+.feed-ordering-item,
+.feed-ordering-extra-item {
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    font-family: "Russo One", var(--sans-font) !important;
+    font-weight: 700;
+}
+
+/* Allow feed headers/authors to breathe */
+.feed-post-header,
+.feed-post-title {
+    overflow: visible !important;
+    text-overflow: clip !important;
+    white-space: normal !important;
+}
+
+a {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+}
+
+a:hover {
+    text-decoration-thickness: 3px;
+}
+
+/* Blocks: sharp, Red Alert style with cut corners */
+.block,
+.window,
+.feed-post,
+.comment,
+.comment-is-pinned,
+.comment-layout-block {
+    border-radius: 3px !important;
+    position: relative;
+    border: var(--block-border);
+    box-shadow: var(--block-shadow);
+    background-image:
+        linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.12),
+            transparent 40%
+        );
+}
+
+/* Red shadow only on hover (Red Alert highlight) */
+.block:hover,
+.window:hover,
+.feed-post:hover,
+.comment:hover,
+.comment-is-pinned:hover,
+.comment-layout-block:hover {
+    box-shadow: 0 0 0 1px #000, 5px 5px 0 #b30000 !important;
+}
+
+.block::before,
+.block::after,
+.feed-post::before,
+.feed-post::after,
+.comment::before,
+.comment::after,
+.comment-is-pinned::before,
+.comment-is-pinned::after,
+.comment-layout-block::before,
+.comment-layout-block::after,
+.window::before,
+.window::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Simple black cut corners matching borders */
+.block::before,
+.feed-post::before,
+.comment::before,
+.comment-is-pinned::before,
+.comment-layout-block::before,
+.window::before {
+    top: 0;
+    left: 0;
+    border-width: 28px 28px 0 0;
+    border-color: #000 transparent transparent transparent;
+}
+
+.block::after,
+.feed-post::after,
+.comment::after,
+.comment-is-pinned::after,
+.comment-layout-block::after,
+.window::after {
+    bottom: 0;
+    right: 0;
+    border-width: 0 0 28px 28px;
+    border-color: transparent transparent #000 transparent;
+}
+
+/* Feed intro/weekly digest blocks should stay plain */
+.feed-post-type-intro,
+.feed-post-type-weekly_digest {
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.feed-post-type-intro::before,
+.feed-post-type-intro::after,
+.feed-post-type-weekly_digest::before,
+.feed-post-type-weekly_digest::after {
+    display: none !important;
+}
+
+.feed-post-type-intro:hover,
+.feed-post-type-weekly_digest:hover {
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.block-header,
+.form-title,
+.window-title {
+    font-family: "Russo One", var(--sans-font);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    border-bottom: 4px double #000;
+    padding-bottom: 18px;
+    margin-bottom: 10px;
+}
+
+.block-subheader {
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: #b30000;
+}
+
+/* Buttons: propaganda style */
+.button,
+.upvote,
+.clicker,
+.theme-switcher .slider {
+    border-radius: 0 !important;
+    border: var(--button-border);
+    background-color: var(--button-bg-color);
+    color: var(--button-color);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    box-shadow: 3px 3px 0 #000;
+}
+
+.button:hover,
+.upvote:hover,
+.clicker:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0 #000;
+}
+
+.button-red {
+    background-color: #ff2b2b;
+    border-color: #000;
+}
+
+.button-blue {
+    background-color: #003399;
+    border-color: #000;
+}
+
+.border,
+.clicker-counter {
+    border-radius: 0 !important;
+    border-width: 2px;
+}
+
+/* Labels, hats, badges: party tags */
+.hat,
+.label,
+.topic,
+.topic-type-card {
+    border-radius: 0 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+}
+
+.hat,
+.label {
+    background: #000;
+    border: 2px solid #ff2b2b;
+}
+
+.label-type-draft {
+    background-color: #b30000;
+}
+
+.label-type-deleted {
+    background-color: #4a0000;
+}
+
+.topic {
+    background-color: #b30000;
+    border: 2px solid #000;
+}
+
+.topic-type-card {
+    border: 3px solid #000;
+    box-shadow: 4px 4px 0 #b30000;
+}
+
+/* Forms and inputs */
+input[type=text],
+input[type=number],
+input[type=file],
+input[type=email],
+input[type=time],
+input[type=url],
+textarea,
+select,
+.CodeMirror,
+.input-select {
+    border-radius: 0 !important;
+    border: 2px solid #000;
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
+}
+
+.form-row-help {
+    font-family: var(--serif-font);
+    font-style: italic;
+}
+
+/* Images: old newspaper / archive look */
+img {
+    filter: sepia(0.85) contrast(1.25) grayscale(0.4);
+}
+
+/* Logo: strong red soviet mark */
+.logo img {
+    /* force vivid red, overriding generic img filter */
+    filter: invert(10%) sepia(97%) saturate(7484%) hue-rotate(1deg) brightness(109%) contrast(119%) !important;
+}
+
+figure img {
+    border: 3px solid #000;
+    box-shadow: 4px 4px 0 #b30000;
+}
+
+/* Misc elements */
+.avatar,
+.clicker-avatar,
+.topic-icon {
+    border-radius: 0 !important;
+}
+
+.paginator-page-active,
+.search-filters-type-selected {
+    border-radius: 0 !important;
+    border: 2px solid #000;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.badge,
+.achievement,
+.user-round-avatar-badge {
+    text-transform: uppercase;
+}
+
