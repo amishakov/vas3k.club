@@ -337,6 +337,34 @@ a:hover {
     border-color: #000;
 }
 
+/* Crash animation: blocks/buttons fall down when clicked */
+@keyframes soviet-crash {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 1;
+    }
+    10% {
+        transform: translate(0, -4px) rotate(-1.5deg);
+    }
+    25% {
+        transform: translate(0, 2px) rotate(2deg);
+    }
+    60% {
+        transform: translate(12px, 45vh) rotate(14deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(24px, 110vh) rotate(24deg);
+        opacity: 0;
+    }
+}
+
+.crash-animation {
+    animation: soviet-crash 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+    transform-origin: top left;
+    will-change: transform, opacity;
+}
+
 .border,
 .clicker-counter {
     border-radius: 0 !important;

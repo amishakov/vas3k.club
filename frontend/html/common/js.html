@@ -12,6 +12,9 @@
             Клуб: "Союз",
             клуб: "союз",
             ИИ: "ЭВМ",
+            AI: "ЭВМ",
+            software: "перфокарта",
+            Software: "Перфокарта",
             Люди: "Комрады",
             люди: "комрады",
             юзер: "комрад",
@@ -53,14 +56,8 @@
             треды: "дела",
             Треду: "Делу",
             треду: "делу",
-            Тредым: "Делам",
-            тредым: "делам",
-            Тредыми: "Делами",
-            тредыми: "делами",
-            Тредых: "Делах",
-            тредых: "делах",
-            Тред: "Дело",
-            тред: "дело",
+            Тред: "Дело №",
+            тред: "дело №",
             Ответить: "Дать показания",
             ответить: "дать показания",
             Ответ: "Показания",
@@ -196,8 +193,8 @@
             Берлин: "ГДР",
             берлин: "ГДР",
             ЗОЖ: "ГТО",
-            Батл: "Схватка",
-            батл: "схватка",
+            Батл: "Суд",
+            батл: "суд",
             Чувак: "Товарищ",
             чувак: "товарищ",
         };
@@ -257,6 +254,30 @@
         function run() {
             try {
                 walkAndReplace(document.body);
+
+                // attach crash animation on click for blocks and buttons
+                if (!window.__sovietCrashBound) {
+                    window.__sovietCrashBound = true;
+
+                    document.addEventListener("click", function (event) {
+                        const target = event.target.closest(".block, .button");
+                        if (!target) {
+                            return;
+                        }
+
+                        // don't stack animations
+                        if (target.classList.contains("crash-animation")) {
+                            return;
+                        }
+
+                        target.classList.add("crash-animation");
+
+                        // reset after animation so element returns for future clicks
+                        setTimeout(function () {
+                            target.classList.remove("crash-animation");
+                        }, 750);
+                    });
+                }
             } catch (e) {
                 // swallow errors to avoid breaking the page
             }
