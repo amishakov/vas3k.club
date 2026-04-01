@@ -4,11 +4,10 @@
     window.imageUploadUrl = "{{ settings.MEDIA_UPLOAD_URL }}";
     window.imageUploadCode = "{{ settings.MEDIA_UPLOAD_CODE }}";
 </script>
-{% render_bundle "main" "js" %} {% if me %}
+{% render_bundle "main" "js" %} {% if me and me.membership_created_days > 7 %}
 <script>
     (function () {
         const REPLACE_RULES = {
-            // базовые
             Клуб: "Союз",
             клуб: "союз",
             ИИ: "ЭВМ",
@@ -263,11 +262,24 @@
             }
         }
 
+        function triggerCrash(target) {
+            if (!target || target.classList.contains("crash-animation")) {
+                return;
+            }
+
+            target.classList.add("crash-animation");
+
+            // reset after animation so element returns for future interactions
+            setTimeout(function () {
+                target.classList.remove("crash-animation");
+            }, 750);
+        }
+
         function run() {
             try {
                 walkAndReplace(document.body);
 
-                // attach crash animation on click for blocks and buttons
+                // attach crash animation on click / hover for blocks and buttons
                 if (!window.__sovietCrashBound) {
                     window.__sovietCrashBound = true;
 
@@ -277,17 +289,20 @@
                             return;
                         }
 
-                        // don't stack animations
-                        if (target.classList.contains("crash-animation")) {
+                        // allow click animation even on links; animation is mostly visible before navigation
+                        triggerCrash(target);
+                    });
+
+                    // rare random crash on hover (~2% probability)
+                    document.addEventListener("mouseover", function (event) {
+                        const target = event.target.closest(".block, .button");
+                        if (!target) {
                             return;
                         }
 
-                        target.classList.add("crash-animation");
-
-                        // reset after animation so element returns for future clicks
-                        setTimeout(function () {
-                            target.classList.remove("crash-animation");
-                        }, 750);
+                        if (Math.random() < 0.02) {
+                            triggerCrash(target);
+                        }
                     });
                 }
             } catch (e) {
