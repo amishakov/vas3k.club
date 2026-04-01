@@ -24,8 +24,9 @@
             События: "Мероприятия",
             события: "мероприятия",
             событие: "мероприятие",
-            Фид: "Новости",
-            фид: "Новости",
+            Фид: "Газета",
+            фид: "газета",
+            фиде: "газету",
             Петербург: "Ленинград",
             питер: "Ленинград",
             Комментарий: "Жалоба",
@@ -108,8 +109,6 @@
             профиле: "личном деле",
             Аккаунт: "Личный номер",
             аккаунт: "личный номер",
-            Плюсик: "Госнаграда",
-            плюсик: "госнаграда",
             Плюсика: "Госнаграды",
             плюсика: "госнаграды",
             Плюсику: "Госнаграде",
@@ -120,6 +119,8 @@
             плюсиков: "госнаград",
             Плюсиками: "Госнаградами",
             плюсиками: "госнаградами",
+            Плюсик: "Госнаграда",
+            плюсик: "госнаграда",
             Подписка: "Приговор до отмены",
             подписка: "приговор до отмены",
             Друзья: "Сокамерники",
@@ -197,15 +198,32 @@
             ЗОЖ: "ГТО",
             Батл: "Схватка",
             батл: "схватка",
+            Чувак: "Товарищ",
+            чувак: "товарищ",
         };
 
         function shouldSkipNode(node) {
-            if (!node.parentNode) {
+            const parent = node.parentNode;
+            if (!parent) {
                 return false;
             }
-            const parent = node.parentNode;
+
             const tag = parent.nodeName;
-            return tag === "SCRIPT" || tag === "STYLE" || tag === "TEXTAREA" || tag === "INPUT";
+            if (tag === "SCRIPT" || tag === "STYLE" || tag === "TEXTAREA" || tag === "INPUT") {
+                return true;
+            }
+
+            // Skip any rich-text / code editors and contenteditable areas
+            if (
+                parent.closest &&
+                parent.closest(
+                    "input, textarea, [contenteditable], .CodeMirror, .cm-editor, .EasyMDEContainer, .editor, .ProseMirror"
+                )
+            ) {
+                return true;
+            }
+
+            return false;
         }
 
         function transformTextNode(node) {
